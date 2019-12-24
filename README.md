@@ -10,7 +10,7 @@ Copy folder lib on to the drive.
 
 Copy one of the files from the projects folder onto the drive and call it main.py.
 
-Now if you restart the board (unplugging and plugging it back in will do this or presing the reset button if you can reach it.
+Now restart the board to start running the program.  Unplugging and plugging it back in will do this or presing the reset button if you can reach it.
 
 ### Programming the board interactivley
 
