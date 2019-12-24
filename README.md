@@ -1,5 +1,5 @@
 # pyboard-robotics
-Robotic control helpers  for the pyboard
+Robotic control helpers  for the pyboard.  Latest code at https://github.com/donuk/pyboard-robotics
 
 ## Controlling the PyBoard
 ## Installing programs to the pyboard
