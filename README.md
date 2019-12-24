@@ -58,5 +58,5 @@ e.g.
 
 The unmodified servos can also be controlled by giving them an angle in degrees
 
-    servo3.angle(40)
+    servo3.degrees(40)
 
