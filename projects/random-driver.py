@@ -1,15 +1,13 @@
-# main.py -- put your code here!
 from time import sleep
 from lib.servo import servo1, servo2, servo3, servo4
+from lib.servo import stop_servos_before_finishing
 from random import choice, randint
 
 
-all_servos = [ servo1, servo2, servo3, servo4]
-all_actions = [ "turn" , "stop" ] 
+all_servos = [servo1, servo2, servo3, servo4]
+all_actions = ["turn", "stop"]
 
-# The try/except block allows us to stop 
-# the servos if anything goes wrong
-try:
+with stop_servos_before_finishing():
     # Loop forever
     while True:
         # Loop through all servos
@@ -18,9 +16,9 @@ try:
             # Choose a random action
             action = choice(all_actions)
 
-            if action=="turn":
+            if action == "turn":
                 # Choose a random angle between 0 and 180
-                angle = randint(0,180)
+                angle = randint(0, 180)
 
                 # Turn to the chosen angle
                 # Note: for modified servos
@@ -28,18 +26,10 @@ try:
                 # the motor to move forward
                 # and others will move backward
 
-                servo.degrees(angle)
+                current_servo.degrees(angle)
 
             if action == "stop":
-                servo.stop()
+                current_servo.stop()
 
         # Wait 1/2 a second before repeating
         sleep(0.5)
-except:
-    # Something's gone wrong stop all the
-    # servos before we exit
-    servo1.stop()
-    servo2.stop()
-    servo3.stop()
-    servo4.stop()
-    raise

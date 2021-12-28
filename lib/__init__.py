@@ -1,3 +1,4 @@
+import lib.pip_path # noqa
 import lib.servo as servo
 servo1 = servo.servo1
 servo2 = servo.servo2

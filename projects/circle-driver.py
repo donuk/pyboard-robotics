@@ -1,13 +1,12 @@
 # main.py -- put your code here!
 from time import sleep
-from lib.servo import servo1, servo2
+from lib.servo import servo1, servo2, stop_servos_before_finishing
 
 
 turn_left = True
 
-# The try/except block allows us to stop 
-# the servos if anything goes wrong
-try:
+# This will stop the servos if anything goes wrong
+with stop_servos_before_finishing():
     # Loop forever
     while True:
 
@@ -20,7 +19,7 @@ try:
             slow_servo = servo2
         else:
             fast_servo = servo2
-            slow_servo = servo11
+            slow_servo = servo1
 
         # Run the fast servo at full speed
         fast_servo.forward()
@@ -28,7 +27,7 @@ try:
         # Repeat 20 times switch the slow servo
         # on and off. Waiting 0.1 seconds each
         # time
-        for counter in range(0,20):
+        for counter in range(0, 20):
             slow_servo.forward()
             sleep(0.1)
             slow_servo.stop()
@@ -38,11 +37,3 @@ try:
         # that next time we change the other
         # direction
         turn_left = not turn_left
-except:
-    # Something's gone wrong stop all the
-    # servos before we exit
-    servo1.stop()
-    servo2.stop()
-    servo3.stop()
-    servo4.stop()
-    raise

@@ -1,4 +1,5 @@
 from pyb import Pin, Timer
+from contextlib import contextmanager
 
 
 class Servo:
@@ -22,7 +23,7 @@ class Servo:
         self.degrees(0)
 
     def stop(self):
-        """ Stop the PWM signal, causes the 
+        """ Stop the PWM signal, causes the
         servo to stop where it is """
         self.channel.pulse_width_percent(0)
 
@@ -32,14 +33,25 @@ class Servo:
         This is not 100% accurate. """
         # Map the angle into the range 2.5-12.5
         fractional_angle = degrees/180.0
-        duty_percent = 2.5+fraction*10
+        duty_percent = 2.5+fractional_angle*10
         # Set the pulse width
         self.channel.pulse_width_percent(duty_percent)
 
 
-# Create servos based on the servo shield 
+# Create servos based on the servo shield
 # pins and the pyboard's timer mappings
-servo1 = Servo('Y1',8,1)
-servo2 = Servo('Y2',8,2)
-servo3 = Servo('Y3',4,3)
-servo4 = Servo('Y4',4,4)
+servo1 = Servo('Y1', 8, 1)
+servo2 = Servo('Y2', 8, 2)
+servo3 = Servo('Y3', 4, 3)
+servo4 = Servo('Y4', 4, 4)
+
+
+@contextmanager
+def stop_servos_before_finishing():
+    try:
+        yield
+    finally:
+        servo1.stop()
+        servo2.stop()
+        servo3.stop()
+        servo4.stop()
